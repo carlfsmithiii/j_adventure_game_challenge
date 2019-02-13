@@ -18,41 +18,57 @@ public class Main {
         locations.put(5, new Location(5, "You are in the forest"));
 
         locations.get(1).addExit("W", 2);
+        locations.get(1).addExit("WEST", 2);
         locations.get(1).addExit("E", 3);
+        locations.get(1).addExit("EAST", 3);
         locations.get(1).addExit("S", 4);
+        locations.get(1).addExit("SOUTH", 4);
         locations.get(1).addExit("N", 5);
+        locations.get(1).addExit("NORTH", 5);
 
         locations.get(2).addExit("N", 5);
+        locations.get(2).addExit("NORTH", 5);
 
         locations.get(3).addExit("W", 1);
+        locations.get(3).addExit("WEST", 1);
 
         locations.get(4).addExit("N", 1);
+        locations.get(4).addExit("NORTH", 1);
         locations.get(4).addExit("W", 2);
+        locations.get(4).addExit("WEST", 2);
 
         locations.get(5).addExit("S", 1);
+        locations.get(5).addExit("SOUTH", 1);
         locations.get(5).addExit("W", 2);
+        locations.get(5).addExit("WEST", 2);
 
 
         int loc = 1;
-//        while (true) {
-//            System.out.println(locations.get(loc).getDescription());
-//            if (loc == 0) {
-//                break;
-//            }
-//
-//            Map<String, Integer> exits = locations.get(loc).getExits();
-//            System.out.print("Available exits are ");
-//            for (String exit: exits.keySet()) {
-//                System.out.print(exit + ", ");
-//            }
-//            System.out.println();
-//
-//            String direction = scanner.nextLine().toUpperCase();
-//            if (exits.containsKey(direction)) {
-//                loc = exits.get(direction);
-//            } else {
-//                System.out.println("You cannot go in that direction");
-//            }
-//        }
+        while (true) {
+            System.out.println(locations.get(loc).getDescription());
+            if (loc == 0) {
+                break;
+            }
+
+            Map<String, Integer> exits = locations.get(loc).getExits();
+            System.out.print("Available exits are ");
+            for (String exit: exits.keySet()) {
+                System.out.print(exit + ", ");
+            }
+            System.out.println();
+
+            String sentence = scanner.nextLine().toUpperCase();
+            boolean match = false;
+            for (String word : sentence.split(" ")) {
+                if (exits.containsKey(word)) {
+                    loc = exits.get(word);
+                    match = true;
+                    break;
+                }
+            }
+            if (!match) {
+                System.out.println("You cannot go in that direction");
+            }
+        }
     }
 }
